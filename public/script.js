@@ -35,7 +35,7 @@ function fetchTodaysProblem() {
       } else {
         problemDate.textContent = data.date;
         problemDescription.textContent = data.description;
-        correctOutput.textContent = data.awnser;
+        correctOutput.textContent = data.answer;
         mustContain = data.mustContain;
       }
     })
@@ -50,14 +50,6 @@ fetchTodaysProblem();
 submitBtn.addEventListener("click", () => {
   const userCode = codeMirror.getValue(); // Hent kode fra CodeMirror
 
-  if (mustContain && !userCode.includes(mustContain)) {
-    attempts--;
-    attempstCounter.innerHTML = attempts + " forsøk igjen.";
-    feedback.innerHTML = "<p>Koden mangler et viktig element, prøv igjen.</p>";
-    feedback.style.color = "orange";
-    return;
-  }
-
   if (userCode.length > 0) {
     fetch("/run-code", {
       method: "POST",
@@ -68,25 +60,48 @@ submitBtn.addEventListener("click", () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        codeOutput.value = data.output; // Sett utdata i textarea
+        codeOutput.value = data.output;
 
-        if (attempts <= 0) {
-          feedback.innerHTML = "Ingen flere forsøk, prøv igjen i morgen.";
-          codeMirror.setOption("readOnly", true); // Deaktiver CodeMirror
-          codeMirror.setOption("cursorBlinkRate", -1);
-        } else {
-          // Vis feedback til brukeren
-          if (data.correct) {
-            feedback.innerHTML = "<p>koden din er korrekt!</p>";
-            feedback.style.color = "green"; // Grønn farge for riktig svar
-            codeMirror.setOption("readOnly", true); // Deaktiver CodeMirror
-            codeMirror.setOption("cursorBlinkRate", -1);
+        if (attempts > 0) {
+          // Sjekk om koden inneholder det nødvendige elementet
+          if (mustContain && userCode.includes(mustContain)) {
+            if (data.correct) {
+              feedback.innerHTML = "<p>Koden din er korrekt!</p>";
+              feedback.style.color = "green"; // Grønn farge for riktig svar
+              codeMirror.setOption("readOnly", true); // Deaktiver CodeMirror
+              codeMirror.setOption("cursorBlinkRate", -1);
+            } else {
+              feedback.innerHTML = "<p>Koden din er feil, prøv igjen.</p>";
+              feedback.style.color = "red"; // Rød farge for feil svar
+
+              // Reduser forsøk etter å ha gitt tilbakemelding
+              attempts--;
+              attempstCounter.innerHTML = attempts + " forsøk igjen.";
+            }
           } else {
+            feedback.innerHTML =
+              "<p>Koden mangler et viktig element, prøv igjen.</p>";
+            feedback.style.color = "orange";
+
+            // Reduser forsøk etter å ha gitt tilbakemelding
             attempts--;
             attempstCounter.innerHTML = attempts + " forsøk igjen.";
-            feedback.innerHTML = "<p>Koden din er feil, prøv igjen.</p>";
-            feedback.style.color = "red"; // Rød farge for feil svar
           }
+
+          // Sjekk om det var siste forsøk etter oppdatering av attempts
+          if (attempts === 0) {
+            feedback.innerHTML = "Ingen flere forsøk, prøv igjen i morgen.";
+            feedback.style.color = "red";
+            submitBtn.disabled = true; // Deaktiver knappen
+            codeMirror.setOption("readOnly", true); // Deaktiver CodeMirror
+            codeMirror.setOption("cursorBlinkRate", -1);
+          }
+        } else {
+          feedback.innerHTML = "Ingen flere forsøk, prøv igjen i morgen.";
+          feedback.style.color = "red";
+          submitBtn.disabled = true; // Deaktiver knappen
+          codeMirror.setOption("readOnly", true); // Deaktiver CodeMirror
+          codeMirror.setOption("cursorBlinkRate", -1);
         }
       })
       .catch((error) => {
