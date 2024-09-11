@@ -13,38 +13,46 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/mode/javascript/javascript.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/theme/lucario.min.css">
 </head>
 
 <body>
 
     <div class="mainContainer">
 
-        <div class="flex flex-col gap-4">
+        <nav class="navbar">
+            <ul class="p-2">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./index.html">Help</a></li>
+            </ul>
+        </nav>
 
-            <div>
+        <div class="flex flex-col gap-0 w-full h-full">
+
+            <div class="p-4">
                 <h2 id="problem-date">Dato</h2>
                 <h1 id="problem-description">Oppgavebeskrivelse</h1>
             </div>
 
-            <div>
+            <div class="p-4">
                 <h2>Forventet resultat:</h2>
-                <div class="p-2 border-2 rounded-md bg-slate-100">
-                    <p disabled id="correct-output">Laster..</p>
+                <div class="py-2">
+                    <p disabled id="correct-output" class="p-2 text-white text-xs">></p>
                 </div>
             </div>
 
-            <div class="my-4">
+            <div class="">
                 <textarea id="user-input"></textarea>
             </div>
 
-            <div>
-                <h2>Din kode output:</h2>
-                <textarea disabled id="codeOutput" class="p-2 border-2 rounded-md bg-slate-100"></textarea>
+            <div id="terminal" class="p-2">
+                <h2 class="underline underline-offset-8 mb-2">TERMINAL</h2>
+                <textarea disabled id="codeOutput" class="p-2 text-white text-xs">></textarea>
             </div>
 
             <p id="feedback"></p>
 
-            <div class="flex flex-row items-center gap-4">
+            <div class="flex flex-row items-center gap-4 p-2">
                 <button id="submit-btn" class="bg-slate-500 text-white py-2 px-4 rounded-md">
                     <h2>Kjør kode</h2>
                 </button>

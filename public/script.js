@@ -24,7 +24,7 @@ const codeMirror = CodeMirror.fromTextArea(
   {
     mode: "javascript",
     lineNumbers: true,
-    theme: "default",
+    theme: "lucario",
   }
 );
 
@@ -46,7 +46,7 @@ function fetchTodaysProblem() {
             <p>${data.date} (Tidligere oppgave.)</p>`;
         }
         problemDescription.textContent = data.description;
-        correctOutput.textContent = data.answer;
+        correctOutput.textContent = "> " + data.answer;
         mustContain = data.mustContain;
       }
     })
