@@ -32,7 +32,9 @@ app.get("/admin/today", (req, res) => {
       if (todaysProblem) {
         res.json(todaysProblem);
       } else {
-        res.json({ error: "Ingen oppgave tilgjengelig for i dag." });
+        const randomIndex = Math.floor(Math.random() * problems.length);
+        const randomProblem = problems[randomIndex];
+        res.json(randomProblem);
       }
     } catch (parseError) {
       console.error(`Error parsing JSON data: ${parseError.message}`);
@@ -81,9 +83,16 @@ app.post("/run-code", (req, res) => {
       const todaysProblem = problems.find((problem) => problem.date === today);
 
       if (!todaysProblem) {
+        // Hvis ingen spesifikke oppgave for i dag, velg en tilfeldig oppgave
+        const randomIndex = Math.floor(Math.random() * problems.length);
+        todaysProblem = problems[randomIndex];
+      }
+
+      if (!todaysProblem || !todaysProblem.answer) {
+        console.log("Ingen oppgave funnet eller svar mangler.");
         return res
           .status(400)
-          .json({ error: "Ingen oppgave funnet for i dag." });
+          .json({ error: "Ingen oppgave funnet eller svar mangler." });
       }
 
       const correctAnswer = todaysProblem.answer; // Hent fasitsvaret

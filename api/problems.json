@@ -1,9 +1,72 @@
 [
   {
-    "description": "Skriv en funksjon som returnerer summen av to tall.",
+    "description": "Skriv en funksjon som returnerer det minste tallet i et array.",
     "date": "11-09-2024",
-    "solution": "function sum(a, b) { return a + b; }",
+    "solution": "function findMin(arr) { return Math.min(...arr); }",
+    "answer": 1,
+    "mustContain": "Math.min"
+  },
+  {
+    "description": "Skriv en funksjon som sorterer et array av tall i synkende rekkefølge.",
+    "date": "12-09-2024",
+    "solution": "function sortArrayDescending(arr) { return arr.sort((a, b) => b - a); }",
+    "answer": [5, 4, 3, 2, 1],
+    "mustContain": ".sort"
+  },
+  {
+    "description": "Skriv en funksjon som fjerner alle forekomster av et gitt tall fra et array.",
+    "date": "13-09-2024",
+    "solution": "function removeOccurrences(arr, value) { return arr.filter(x => x !== value); }",
+    "answer": [1, 2, 2, 3],
+    "mustContain": ".filter"
+  },
+  {
+    "description": "Skriv en funksjon som finner det nest største tallet i et array.",
+    "date": "14-09-2024",
+    "solution": "function secondLargest(arr) { const unique = [...new Set(arr)]; unique.sort((a, b) => b - a); return unique[1]; }",
+    "answer": 4,
+    "mustContain": ".sort"
+  },
+  {
+    "description": "Skriv en funksjon som dobler alle tallene i et array.",
+    "date": "15-09-2024",
+    "solution": "function doubleArray(arr) { return arr.map(x => x * 2); }",
+    "answer": [2, 4, 6],
+    "mustContain": ".map"
+  },
+  {
+    "description": "Skriv en funksjon som sjekker om et array inneholder et gitt element.",
+    "date": "16-09-2024",
+    "solution": "function containsElement(arr, value) { return arr.includes(value); }",
+    "answer": true,
+    "mustContain": ".includes"
+  },
+  {
+    "description": "Skriv en funksjon som konverterer et array av strenger til store bokstaver.",
+    "date": "17-09-2024",
+    "solution": "function toUpperCaseArray(arr) { return arr.map(x => x.toUpperCase()); }",
+    "answer": ["HELLO", "WORLD"],
+    "mustContain": ".map"
+  },
+  {
+    "description": "Skriv en funksjon som beregner gjennomsnittet av tallene i et array.",
+    "date": "18-09-2024",
+    "solution": "function averageArray(arr) { return arr.reduce((sum, num) => sum + num, 0) / arr.length; }",
     "answer": 3,
-    "mustContain": "+"
+    "mustContain": ".reduce"
+  },
+  {
+    "description": "Skriv en funksjon som finner det største tallet i et array og det minste tallet i et array.",
+    "date": "19-09-2024",
+    "solution": "function findMaxMin(arr) { return { max: Math.max(...arr), min: Math.min(...arr) }; }",
+    "answer": { "max": 5, "min": 1 },
+    "mustContain": "Math.max"
+  },
+  {
+    "description": "Skriv en funksjon som teller antall forekomster av en verdi i et array.",
+    "date": "20-09-2024",
+    "solution": "function countOccurrences(arr, value) { return arr.reduce((count, current) => (current === value ? count + 1 : count), 0); }",
+    "answer": 3,
+    "mustContain": ".reduce"
   }
 ]

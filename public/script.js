@@ -10,6 +10,13 @@ const feedback = document.getElementById("feedback");
 let attempts = 3;
 const attempstCounter = document.getElementById("attempts");
 
+const today = new Date()
+  .toISOString()
+  .slice(0, 10)
+  .split("-")
+  .reverse()
+  .join("-");
+
 attempstCounter.innerHTML = attempts + " forsøk igjen.";
 
 const codeMirror = CodeMirror.fromTextArea(
@@ -34,6 +41,10 @@ function fetchTodaysProblem() {
         // Hvis dataen hentes, vis riktig data
       } else {
         problemDate.textContent = data.date;
+        if (data.date !== today) {
+          problemDate.innerHTML = `
+            <p>${data.date} (Tidligere oppgave.)</p>`;
+        }
         problemDescription.textContent = data.description;
         correctOutput.textContent = data.answer;
         mustContain = data.mustContain;
