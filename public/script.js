@@ -78,7 +78,7 @@ submitBtn.addEventListener("click", () => {
           if (mustContain && userCode.includes(mustContain)) {
             if (data.correct) {
               feedback.innerHTML = "<p>Koden din er korrekt!</p>";
-              feedback.style.color = "green"; // Grønn farge for riktig svar
+              feedback.style.color = "green !important"; // Grønn farge for riktig svar
               codeMirror.setOption("readOnly", true); // Deaktiver CodeMirror
               codeMirror.setOption("cursorBlinkRate", -1);
             } else {
@@ -92,7 +92,7 @@ submitBtn.addEventListener("click", () => {
           } else {
             feedback.innerHTML =
               "<p>Koden mangler et viktig element, prøv igjen.</p>";
-            feedback.style.color = "orange";
+            feedback.style.color = "orange !important";
 
             // Reduser forsøk etter å ha gitt tilbakemelding
             attempts--;
@@ -102,14 +102,14 @@ submitBtn.addEventListener("click", () => {
           // Sjekk om det var siste forsøk etter oppdatering av attempts
           if (attempts === 0) {
             feedback.innerHTML = "Ingen flere forsøk, prøv igjen i morgen.";
-            feedback.style.color = "red";
+            feedback.style.color = "red !important";
             submitBtn.disabled = true; // Deaktiver knappen
             codeMirror.setOption("readOnly", true); // Deaktiver CodeMirror
             codeMirror.setOption("cursorBlinkRate", -1);
           }
         } else {
           feedback.innerHTML = "Ingen flere forsøk, prøv igjen i morgen.";
-          feedback.style.color = "red";
+          feedback.style.color = "red !important";
           submitBtn.disabled = true; // Deaktiver knappen
           codeMirror.setOption("readOnly", true); // Deaktiver CodeMirror
           codeMirror.setOption("cursorBlinkRate", -1);
