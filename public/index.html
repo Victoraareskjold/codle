@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codle</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/mode/javascript/javascript.min.js"></script>
+</head>
+
+<body>
+
+    <div class="mainContainer">
+
+        <div class="flex flex-col gap-4">
+
+            <div>
+                <h2 id="problem-date">Dato</h2>
+                <h1 id="problem-description">Oppgavebeskrivelse</h1>
+            </div>
+
+            <div>
+                <h2>Forventet resultat:</h2>
+                <div class="p-2 border-2 rounded-md bg-slate-100">
+                    <p disabled id="correct-output">Laster..</p>
+                </div>
+            </div>
+
+            <div class="my-4">
+                <textarea id="user-input"></textarea>
+            </div>
+
+            <div>
+                <h2>Din kode output:</h2>
+                <textarea disabled id="codeOutput" class="p-2 border-2 rounded-md bg-slate-100"></textarea>
+            </div>
+
+            <p id="feedback"></p>
+
+            <div class="flex flex-row items-center gap-4">
+                <button id="submit-btn" class="bg-slate-500 text-white py-2 px-4 rounded-md">
+                    <h2>Kjør kode</h2>
+                </button>
+                <p id="attempts"></p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

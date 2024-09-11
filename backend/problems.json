@@ -1,0 +1,9 @@
+[
+  {
+    "description": "Skriv en funksjon som returnerer summen av to tall.",
+    "date": "11-09-2024",
+    "solution": "function sum(a, b) { return a + b; }",
+    "awnser": "3",
+    "mustContain": "+"
+  }
+]
